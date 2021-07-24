@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react';
-import clsx from 'clsx';
-import {NavLink} from 'react-router-dom';
+import {NavLink, useHistory} from 'react-router-dom'; 
+import clsx from 'clsx'; 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
@@ -17,11 +17,13 @@ import TuneIcon from '@material-ui/icons/Tune';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import DashboardPage from './DashboardPage';
 import Testimonial from './Testimonial';
+import Profile from './Profile';
 import Slider from './Slider';
 const drawerWidth = 240;
 
@@ -88,7 +90,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Dashboard = () => {
-  
+  let history = useHistory(); 
   useEffect(() => {
     console.log("Document ready");
     // If not logged in then redirect to login.
@@ -113,6 +115,7 @@ const Dashboard = () => {
     {text:'Dashboard',link:'dashboard',icon:<DashboardIcon/>},
     {text:'Testimonial', link:'testimonial',icon:<BookIcon/>},
     {text:'Slider',link:'slider',icon:<TuneIcon/>},
+    {text:'Profile',link:'profile',icon:<AccountBoxIcon/>},
     {text:'Logout',link:'logout',icon:<ExitToAppIcon/>}
   ];
 
@@ -130,7 +133,9 @@ const Dashboard = () => {
       return <Typography paragraph><Testimonial/></Typography>
      }else if(currentComponent == "/admin/slider"){  
       return <Typography paragraph><Slider/></Typography>
-    }
+     }else if(currentComponent == "/admin/profile"){  
+      return <Typography paragraph><Profile/></Typography>
+     }
   } 
 
   return (

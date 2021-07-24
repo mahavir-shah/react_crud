@@ -80,3 +80,16 @@ color: white;
 .links a{
 margin-left: 4px;
 }
+.loginPage{
+    background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: 'Numans', sans-serif;
+    max-width: 100%;
+}
+.signin-page{
+    height: 627px;
+}
+.signup-page{
+    height: 727px;
+}

@@ -18,7 +18,7 @@
     "material-table": "^1.69.2",
     "mime": "^1.6.0",
     "mysql": "^2.18.1",
-    "nodemon": "^2.0.7",
+    "nodemon": "^2.0.12",
     "react": "^17.0.1",
     "react-avatar": "^3.10.0",
     "react-axios": "^2.0.4",

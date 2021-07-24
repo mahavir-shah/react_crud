@@ -1,5 +1,5 @@
 import React,{ useState, useEffect } from 'react';
-import { history, useHistory } from 'react-router-dom';
+import {  useHistory, NavLink } from 'react-router-dom';
 import axios from 'axios';
 import './../assets/login.css';
 import { toast } from 'react-toast-notification';
@@ -42,15 +42,15 @@ const Login = () => {
               }).then(function(response){
                   console.log(response);
                   console.log(typeof response.status != 'undefined' && response.status == 200);
-                if(typeof response.status != 'undefined' && response.status == 200){ 
-                    localStorage.setItem("userInfo",response.data[0]);
+                if(typeof response.status != 'undefined' && response.status == 200 && response.data.length > 0){ 
+                    localStorage.setItem("userInfo",JSON.stringify(response.data[0]));
                     console.log("Result",response.data[0]);
                     history.push('/admin/dashboard');
                 }else{ 
                     toast('Invalid username & password !', {
                         status: 'Error', 
                         type: 'error',
-                        autoHide: false,
+                        autoHide: true,
                         delay: '7000'
                     })
                 }
@@ -64,8 +64,7 @@ const Login = () => {
     }
 
     return (
-        <div className="container loginPage" style={{backgroundImage: "url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg')",
-backgroundSize: "cover",backgroundRepeat: "no-repeat",height: "627px",fontFamily: "'Numans', sans-serif"}}>
+        <div className="container loginPage signin-page">
             <div className="d-flex justify-content-center h-100">
                 <div className="card">
                     <div className="card-header">
@@ -82,7 +81,7 @@ backgroundSize: "cover",backgroundRepeat: "no-repeat",height: "627px",fontFamily
                                 <div className="input-group-prepend">
                                     <span className="input-group-text"><i className="fas fa-user"></i></span>
                                 </div>
-                                <input type="text" className="form-control" placeholder="Username" name="username" value={userdata.username} onChange={updateUserData} />
+                                <input type="text" className="form-control" placeholder="Email" name="username" value={userdata.username} onChange={updateUserData} />
                             </div>
                             <div className="text-danger form-group">{userdata.usernameErr}</div>
                             <div className="input-group">
@@ -102,7 +101,7 @@ backgroundSize: "cover",backgroundRepeat: "no-repeat",height: "627px",fontFamily
                     </div>
                     <div className="card-footer"> 
                         <div className="d-flex justify-content-center links">
-                            Don't have an account?<a href="#">Sign Up</a>
+                            Don't have an account?<NavLink to='register'>Sign Up</NavLink>
                         </div>
                         <div className="d-flex justify-content-center">
                             <a href="#">Forgot your password?</a>
