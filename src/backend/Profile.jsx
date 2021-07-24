@@ -92,6 +92,7 @@ const Profile = () => {
         reader.readAsDataURL(files[0]);
     }; 
 
+    // Submit Profile
     const SubmitProfile = () => {
         console.log("userdata",userdata);
         var tmp = 0;
