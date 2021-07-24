@@ -128,6 +128,7 @@
 	});
 
 	router.post('/updateProfile', (req, res, next) => {
+		/*---------- For Update User Profile ---------- */
 		res.setHeader('Content-Type', 'application/json'); 
 		const profileData = req.body;
 		let fileName = "";
