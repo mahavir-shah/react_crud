@@ -1,6 +1,6 @@
-import React,{useEffect,useState} from 'react';
-import {NavLink, useHistory} from 'react-router-dom'; 
-import clsx from 'clsx'; 
+import React, { useEffect, useState } from 'react';
+import { NavLink, useHistory } from 'react-router-dom';
+import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
@@ -90,15 +90,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Dashboard = () => {
-  let history = useHistory(); 
+  let history = useHistory();
   useEffect(() => {
-    console.log("Document ready");
+    console.log('Document ready');
     // If not logged in then redirect to login.
-    setCurrentComponent (() => { return window.location.pathname; })
+    setCurrentComponent(() => {
+      return window.location.pathname;
+    });
   });
-
-
-  
 
   const classes = useStyles();
   const theme = useTheme();
@@ -112,31 +111,47 @@ const Dashboard = () => {
     setOpen(false);
   };
   const menuList = [
-    {text:'Dashboard',link:'dashboard',icon:<DashboardIcon/>},
-    {text:'Testimonial', link:'testimonial',icon:<BookIcon/>},
-    {text:'Slider',link:'slider',icon:<TuneIcon/>},
-    {text:'Profile',link:'profile',icon:<AccountBoxIcon/>},
-    {text:'Logout',link:'logout',icon:<ExitToAppIcon/>}
+    { text: 'Dashboard', link: 'dashboard', icon: <DashboardIcon /> },
+    { text: 'Testimonial', link: 'testimonial', icon: <BookIcon /> },
+    { text: 'Slider', link: 'slider', icon: <TuneIcon /> },
+    { text: 'Profile', link: 'profile', icon: <AccountBoxIcon /> },
+    { text: 'Logout', link: 'logout', icon: <ExitToAppIcon /> },
   ];
 
-  const [currentComponent,setCurrentComponent] = useState(window.location.pathname);
+  const [currentComponent, setCurrentComponent] = useState(
+    window.location.pathname
+  );
 
-  const checkCurrentPage = ()=>{
-    console.log("path: "+window.location.pathname);
-    /* setCurrentComponent = () => {
-      return window.location.pathname;
-    } */
-    console.log("component: "+currentComponent);
-    if(currentComponent == "/admin/dashboard" || currentComponent == "/admin"){
-      return <Typography paragraph><DashboardPage/></Typography> 
-     }else if(currentComponent == "/admin/testimonial"){  
-      return <Typography paragraph><Testimonial/></Typography>
-     }else if(currentComponent == "/admin/slider"){  
-      return <Typography paragraph><Slider/></Typography>
-     }else if(currentComponent == "/admin/profile"){  
-      return <Typography paragraph><Profile/></Typography>
-     }
-  } 
+  const checkCurrentPage = () => {
+    if (
+      currentComponent == '/admin/dashboard' ||
+      currentComponent == '/admin'
+    ) {
+      return (
+        <Typography paragraph>
+          <DashboardPage />
+        </Typography>
+      );
+    } else if (currentComponent == '/admin/testimonial') {
+      return (
+        <Typography paragraph>
+          <Testimonial />
+        </Typography>
+      );
+    } else if (currentComponent == '/admin/slider') {
+      return (
+        <Typography paragraph>
+          <Slider />
+        </Typography>
+      );
+    } else if (currentComponent == '/admin/profile') {
+      return (
+        <Typography paragraph>
+          <Profile />
+        </Typography>
+      );
+    }
+  };
 
   return (
     <div className={classes.root}>
@@ -179,26 +194,33 @@ const Dashboard = () => {
       >
         <div className={classes.toolbar}>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+            {theme.direction === 'rtl' ? (
+              <ChevronRightIcon />
+            ) : (
+              <ChevronLeftIcon />
+            )}
           </IconButton>
         </div>
         <Divider />
         <List>
           {menuList.map((text, index) => (
-            <NavLink to={text.link} style={{ textDecoration:"none", color:"gray" }}> 
+            <NavLink
+              to={text.link}
+              style={{ textDecoration: 'none', color: 'gray' }}
+            >
               <ListItem button key={text.text}>
-                  <ListItemIcon>{text.icon}</ListItemIcon>
-                  <ListItemText primary={text.text} /> 
+                <ListItemIcon>{text.icon}</ListItemIcon>
+                <ListItemText primary={text.text} />
               </ListItem>
             </NavLink>
           ))}
         </List>
-      </Drawer> 
+      </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
         {checkCurrentPage()}
       </main>
     </div>
   );
-}
+};
 export default Dashboard;
